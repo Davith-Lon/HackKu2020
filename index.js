@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 var canvas, context, controller, floor, rectangle, gameLoop, weather, weatherColor, backgroundColor, grdSun, grdSnow, grdRain;
+=======
+var canvas, context, controller, rectangle, gameLoop, weather, weatherColor, Locations, key, rand;
+
+locations = [328846]
+key = '39KfKD60bv3lZ6CC6qCBMF5ZSfKo3ukU';
+rand = Math.random(1);
+>>>>>>> ac18ac5084f932d593313db901c543737e96f0ac
 
 async function getWeather() {
-    const response = await fetch('https://dataservice.accuweather.com/currentconditions/v1/328846?apikey=39KfKD60bv3lZ6CC6qCBMF5ZSfKo3ukU');
+    const response = await fetch('https://dataservice.accuweather.com/currentconditions/v1/' + locations[rand] + '?apikey=' + key);
     const json = await response.json();
     return json.WeatherText;
 }
@@ -10,20 +18,24 @@ weather = getWeather();
 if (weather != "Sunny"){
     if (weather != "Rain"){
         if (weather != "Snow"){
-            weather = "sunny";
+            weather = "Sunny";
         }
     }
 }
-weather = "Sunny";
 
 const CANVAS_WIDTH = 1418;
 const CANVAS_HEIGHT = 760;
 
+<<<<<<< HEAD
 grdSun = '#FFFFFF';
 
 if (weather == "Sunny"){//------------------------------
     backgroundColor = grdSun;
     weatherColor = "#784814" ; 
+=======
+if (weather == "Sunny"){
+    weatherColor = "#784814" ; //change color
+>>>>>>> ac18ac5084f932d593313db901c543737e96f0ac
 }
 
 else if (weather == "Snow"){
@@ -44,6 +56,9 @@ numObstacles = 0;
 var obstacles = []
 var enemy;
 var jumpVel = 5;
+var jumpHeight = 75;
+var currSd = 0;
+var glue = false;
 
 rectangle = {
     jumping: true,
@@ -74,7 +89,7 @@ class Obstacle {
     move() {
         this.xPos -= this.speed;
         context.fillStyle = "#539af6";
-        context.fillRect(this.xPos, this.yPos, this.width, this.height)
+        context.fillRect(this.xPos, this.yPos, this.wdith, this.height);
     };
 
 };
@@ -99,12 +114,13 @@ controller = {
     }
 }
 function moveRect(){
+    console.log(rectangle.xVel);
     if (controller.up && rectangle.jumping == false){
         if (weather == "Snow"){
-            rectangle.yVel -= 50;
+            rectangle.yVel -= (jumpHeight-15);
         }
         else {
-            rectangle.yVel -= 65;
+            rectangle.yVel -= (jumpHeight);
         }
         rectangle.jumping = true;
     }
@@ -134,6 +150,11 @@ function moveRect(){
     else if (weather == "Snow" || weather == "Sunny"){
         rectangle.xVel *= 0.9;
         rectangle.yVel *= 0.9;
+    }
+    if (glue == true&&!controller.left&&!controller.right&&rectangle.xVel >= -currSd) {
+        if (rectangle.xVel <= 0) {
+            rectangle.xVel -= (currSd+rectangle.xVel);
+        }
     }
     if (rectangle.yPos > 700){
         rectangle.jumping = false;
@@ -169,7 +190,8 @@ document.getElementById("TextBox").style.opacity = "1"; // Makes it so we can se
 document.getElementById("TextBox").style.filter = 'alpha(opacity=90)';
 
 function dectectCollide(rect1, rect2) {
-    console.log(rect1.xPos);
+    //console.log(rect1.xPos);
+    compensate = false;
     if (rect1.xPos+rect1.width >= rect2.xPos &&
         rect1.xPos < rect2.xPos+rect2.width-(rect1.width-jumpVel) &&
         rect1.yPos <= rect2.yPos + rect2.height &&
@@ -197,11 +219,20 @@ function dectectCollide(rect1, rect2) {
             rect1.yPos+rect1.height < rect2.yPos + rect2.height) {
                 if (rect1.yPos+rect1.height>=rect2.yPos-rect1.height) {
                     rect1.yPos = rect2.yPos-rect1.height-jumpVel;
-                    rect1.xVel = -rect2.speed;
-                    if (rect1.yVel <= 100) {
-                        rect1.yVel = 0; }
+                    if (glue == false) {
+                        glue = true;
+                        currSd = rect2.speed;
+                    }
+                    if (rect1.yVel <= jumpHeight) {
+                        
+                        
+                        
+                        rect1.yVel = 0;
+                        rect1.jumping = false; }
                 }
-
+    }
+    else {
+        glue = false;
     }
     }
 
@@ -228,7 +259,7 @@ function drawWeather(){
 
 function makeObstacles() {
     if (numObstacles <= 1) {
-        enemy = new Obstacle(650, 100, 100, "#539af6", 5);
+        enemy = new Obstacle(650, 2000, 100, "#539af6", 5);
         let newLength = obstacles.unshift(enemy)
     }
     
