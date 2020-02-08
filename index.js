@@ -1,7 +1,11 @@
-var canvas, context, controller, floor, rectangle, gameLoop, weather, weatherColor;
+var canvas, context, controller, rectangle, gameLoop, weather, weatherColor, Locations, key, rand;
+
+locations = [328846]
+key = '39KfKD60bv3lZ6CC6qCBMF5ZSfKo3ukU';
+rand = Math.random(1);
 
 async function getWeather() {
-    const response = await fetch('https://dataservice.accuweather.com/currentconditions/v1/328846?apikey=39KfKD60bv3lZ6CC6qCBMF5ZSfKo3ukU');
+    const response = await fetch('https://dataservice.accuweather.com/currentconditions/v1/' + locations[rand] + '?apikey=' + key);
     const json = await response.json();
     return json.WeatherText;
 }
@@ -10,17 +14,16 @@ weather = getWeather();
 if (weather != "Sunny"){
     if (weather != "Rain"){
         if (weather != "Snow"){
-            weather = "sunny";
+            weather = "Sunny";
         }
     }
 }
-weather = "Sunny";
 
 const CANVAS_WIDTH = 1418;
 const CANVAS_HEIGHT = 760;
 
 if (weather == "Sunny"){
-    weatherColor = "#784814" ; 
+    weatherColor = "#784814" ; //change color
 }
 
 else if (weather == "Snow"){
