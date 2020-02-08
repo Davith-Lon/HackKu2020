@@ -7,36 +7,40 @@ p {
   margin-left: 20px;
 }
 
-#startButton {
-    margin-left: 0px;
-    margin-top: 0px;
-    width: 84px;
-    height: 45px;   
-    background: transparent;
+#homeScreen{
+  background-color: black;
+  border: 3px solid red;
+}
+
+#onePlayer {
+    margin-left: 500px;
+    margin-top: 400px;
+    width: 200px;
+    height: 100px;   
+    background: white;
     border: none;
     color: green;   
     font-size:14px;
     font-weight:700;
     position: absolute;
-    left: 756px;
-    top: 345px;
+    left: 0px;
+    top: 0px;
+}
+
+#twoPlayer {
+  margin-left: 900px;
+  margin-top: 400px;
+  width: 200px;
+  height: 100px;   
+  background: white ;
+  color: green;   
+  font-size:14px;
+  font-weight:700;
+  position: absolute;
+  left: 0px;
+  top: 0px;
 }
 
 #gameScreen{
   border: 3px solid red;
-}
-
-#homeScreenContainer{
-  width: 1582px;
-  height: 801px;
-  position: absolute;
-  background: black;
-  left: 11px;
-  top: 11px;
-}
-#homeAnimate {
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  background-color: red;
 }
