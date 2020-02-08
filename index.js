@@ -70,23 +70,24 @@ function moveRect(){
 }
 
 function draw(){
-    context.fillStyle = "#202020";
+    context.fillStyle = "#202020"; //background
     context.fillRect(0,0,1582,750);
 
-    context.fillStyle = "#000000";
+    context.fillStyle = "#000000"; //floor
     context.fillRect(0, 750, 1582, 50);
 
-    context.fillStyle = "#ff0000";
+    context.fillStyle = "#ff0000"; //rectangle
     context.beginPath();
     context.rect(rectangle.xPos, rectangle.yPos, rectangle.width, rectangle.height);
+
+    
     context.fill();
+
 }
 
 gameLoop = function(){
-    
     moveRect();
     draw();
-
     window.requestAnimationFrame(gameLoop);
 }
 
