@@ -1,7 +1,7 @@
 var canvas, context, controller, floor, rectangle, gameLoop, weather;
 
-const CANVAS_WIDTH = 1366;
-const CANVAS_HEIGHT = 700;
+const CANVAS_WIDTH = 1418;
+const CANVAS_HEIGHT = 760;
 
 var request = new XMLHttpRequest();
 request.open('GET', 'http://dataservice.accuweather.com/currentconditions/v1/328846?apikey=39KfKD60bv3lZ6CC6qCBMF5ZSfKo3ukU', true);
@@ -122,11 +122,6 @@ document.getElementById("TextBox").style.opacity = "1";
 document.getElementById("TextBox").style.filter = 'alpha(opacity=90)';
 
 
-<<<<<<< HEAD
-
-
-//-------------------------------------------------------------------
-=======
 function dectectCollide(rect1, rect2) {
     console.log(rect1.xPos);
     if (rect1.xPos+rect1.width >= rect2.xPos &&
@@ -164,7 +159,6 @@ function dectectCollide(rect1, rect2) {
     }
     }
 
->>>>>>> fa77c50433838b9052839a261cf04675bf92e2b4
 function drawWeather(){
 
     if (weather[0].WeatherText == "Sunny"){
