@@ -1,16 +1,14 @@
 var canvas, context, controller, floor, rectangle, gameLoop, weather;
 
-var request = new XMLHttpRequest();
-request.open('GET', 'http://dataservice.accuweather.com/currentconditions/v1/328846?apikey=39KfKD60bv3lZ6CC6qCBMF5ZSfKo3ukU', true);
-request.responseType = 'text';
+async function getWeather() {
+    const response = await fetch('https://dataservice.accuweather.com/currentconditions/v1/328846?apikey=39KfKD60bv3lZ6CC6qCBMF5ZSfKo3ukU');
+    const json = await response.json();
+    return json.WeatherText;
+}
 
-request.onload = function () {
-    if (request.readyState === request.DONE && request.status === 200) {
-        weather = JSON.parse(request.responseText);
-        console.log(weather[0].WeatherText);
-    }
-};
-request.send(null);
+weather = "Sunny";
+
+//weather = getWeather();
 
 context = document.querySelector("canvas").getContext("2d");
 context.canvas.width = 1582;
@@ -74,25 +72,48 @@ controller = {
 }
 function moveRect(){
     if (controller.up && rectangle.jumping == false){
-        rectangle.yVel -= 100;
+        if (weather == "Snow"){
+            rectangle.yVel -= 35;
+        }
+        else {
+            rectangle.yVel -= 50;
+        }
         rectangle.jumping = true;
     }
     if (controller.left){
-        rectangle.xVel -= 3;
+        if (weather == "Snow"){
+            rectangle.xVel -= 2;
+        }
+        else {
+            rectangle.xVel -= 3;
+        }
     }
     if (controller.right){
-        rectangle.xVel += 3;
+        if (weather == "Snow"){
+            rectangle.xVel += 2;
+        }
+        else {
+            rectangle.xVel += 3;
+        }
     }
     rectangle.yVel += 5;
     rectangle.xPos += rectangle.xVel;
     rectangle.yPos += rectangle.yVel;
-    rectangle.xVel *= 0.9;
-    rectangle.yVel *= 0.9;
 
+    if (weather == "Rain"){
+        rectangle.xVel *= 0.5;
+    }
+    else if (weather == "Snow" || weather == "Sunny"){
+        rectangle.xVel *= 0.9;
+        rectangle.yVel *= 0.9;
+    }
     if (rectangle.yPos > 700){
         rectangle.jumping = false;
         rectangle.yPos = 700;
         rectangle.yVel = 0;
+    }
+    if(rectangle.xPos <= 0){
+        window.location = "homeScreen.html";
     }
 }
 
@@ -120,24 +141,16 @@ function drawWeather(){
 gameLoop = function(){
     moveRect();
     draw();
-    
-
     if (numObstacles <= 1) {
         enemy = new Obstacle(700, 50, 50, "#539af6", 5);
     }
-    
-    
     enemy.draw();
     context.beginPath();
-    
     context.fill();
     enemy.move();
     console.log(numObstacles);
-
     window.requestAnimationFrame(gameLoop);
 }
-
-
 window.addEventListener("keydown", controller.keyListener)
 window.addEventListener("keyup", controller.keyListener)
 window.requestAnimationFrame(gameLoop)
