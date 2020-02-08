@@ -1,18 +1,16 @@
-var canvas, context, controller, rectangle, gameLoop;
-
-//canvas = document.getElementById("gameScreen");
-//context = canvas.getContext("2d");
+var canvas, context, controller, floor, rectangle, gameLoop;
 
 context = document.querySelector("canvas").getContext("2d");
 context.canvas.height = 400;
 context.canvas.height = 400;
+
 rectangle = {
     jumping: true,
     height:  50,
     width: 50,
-    xPos: 0,
+    xPos: 766,
     xVel: 0,
-    yPos: 0,
+    yPos: 750,
     yVel: 0
 
 };
@@ -59,7 +57,7 @@ gameLoop = function(){
         rectangle.yVel = 0;
     }
     context.fillStyle = "#202020";
-    context.fillRect(0,0,400,400);
+    context.fillRect(0, 750, 1582, 50);
 
     context.fillStyle = "#ff0000";
     context.beginPath();
