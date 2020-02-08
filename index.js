@@ -157,7 +157,7 @@ function moveRect(){
 }
 
 function draw(){
-    context.fillStyle = backgroundColor; //background
+    context.fillStyle = "#000000"; //background
     context.fillRect(0,0,1582,750);
 
     context.fillStyle = weatherColor; //floor
