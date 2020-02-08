@@ -49,6 +49,8 @@ class Obstacle {
 
     move() {
         this.xPos -= this.speed;
+        context.fillStyle = "#539af6";
+        context.fillRect = (this.xPos, this.yPos, context.canvas.width, context.canvas.height)
     };
 
 };
