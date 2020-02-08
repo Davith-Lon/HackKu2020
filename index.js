@@ -1,4 +1,4 @@
-var canvas, context, controller, floor, rectangle, gameLoop, weather, weatherColor;
+var canvas, context, controller, floor, rectangle, gameLoop, weather, weatherColor, backgroundColor, grdSun, grdSnow, grdRain;
 
 async function getWeather() {
     const response = await fetch('https://dataservice.accuweather.com/currentconditions/v1/328846?apikey=39KfKD60bv3lZ6CC6qCBMF5ZSfKo3ukU');
@@ -19,15 +19,20 @@ weather = "Sunny";
 const CANVAS_WIDTH = 1418;
 const CANVAS_HEIGHT = 760;
 
-if (weather == "Sunny"){
+grdSun = '#FFFFFF';
+
+if (weather == "Sunny"){//------------------------------
+    backgroundColor = grdSun;
     weatherColor = "#784814" ; 
 }
 
 else if (weather == "Snow"){
+    backgroundColor = grdSnow;
     weatherColor = "#FFFFFF";
 }
 
 else if (weather == "Rain"){
+    backgroundColor = grdRain;
     weatherColor = "#14C0F3";
 }
 
@@ -145,7 +150,7 @@ function moveRect(){
 }
 
 function draw(){
-    context.fillStyle = "#202020"; //background
+    context.fillStyle = backgroundColor; //background
     context.fillRect(0,0,1582,750);
 
     context.fillStyle = weatherColor; //floor
