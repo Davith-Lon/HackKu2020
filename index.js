@@ -6,9 +6,18 @@ async function getWeather() {
     return json.WeatherText;
 }
 
+weather = getWeather();
+if (weather != "Sunny"){
+    if (weather != "Rain"){
+        if (weather != "Snow"){
+            weather = "sunny";
+        }
+    }
+}
 weather = "Sunny";
 
-//weather = getWeather();
+const CANVAS_WIDTH = 1418;
+const CANVAS_HEIGHT = 760;
 
 context = document.querySelector("canvas").getContext("2d");
 context.canvas.width = 1582;
@@ -78,24 +87,24 @@ function moveRect(){
             rectangle.yVel -= 50;
         }
         else {
-            rectangle.yVel -= 50;
+            rectangle.yVel -= 65;
         }
         rectangle.jumping = true;
     }
     if (controller.left){
         if (weather == "Snow"){
-            rectangle.xVel -= 2;
+            rectangle.xVel -= 1;
         }
         else {
-            rectangle.xVel -= 3;
+            rectangle.xVel -= 2;
         }
     }
     if (controller.right){
         if (weather == "Snow"){
-            rectangle.xVel += 2;
+            rectangle.xVel += 1;
         }
         else {
-            rectangle.xVel += 3;
+            rectangle.xVel += 2;
         }
     }
     rectangle.yVel += jumpVel;
@@ -103,7 +112,7 @@ function moveRect(){
     rectangle.yPos += rectangle.yVel;
 
     if (weather == "Rain"){
-        rectangle.xVel *= 0.5;
+        rectangle.xVel *= 0.95;
     }
     else if (weather == "Snow" || weather == "Sunny"){
         rectangle.xVel *= 0.9;
@@ -116,6 +125,10 @@ function moveRect(){
     }
     if(rectangle.xPos <= 0){
         window.location = "homeScreen.html";
+    }
+    if(rectangle.xPos >= 1535){
+        rectangle.xPos = 1535;
+        rectangle.xVel = 0;
     }
 }
 
@@ -134,6 +147,11 @@ function draw(){
     context.fill();
 
 }
+//------------------------------------------------------------------
+
+document.getElementById("TextBox").style.opacity = "1";
+document.getElementById("TextBox").style.filter = 'alpha(opacity=90)';
+
 
 function dectectCollide(rect1, rect2) {
     console.log(rect1.xPos);
@@ -174,6 +192,17 @@ function dectectCollide(rect1, rect2) {
 
 function drawWeather(){
 
+    if (weather == "Sunny"){
+
+
+    
+    }
+    else if (weather == "Snow"){
+
+    }
+    else if(weather == "Rain"){
+
+    }
     
 }
 
