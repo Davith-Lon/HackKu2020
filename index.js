@@ -1,4 +1,4 @@
-var canvas, context, controller, rectangle, gameLoop;
+var canvas, context, controller, floor, rectangle, gameLoop;
 
 
 rectangle = {
@@ -13,7 +13,11 @@ rectangle = {
 };
 canvas = document.getElementById("gameScreen");
 context = canvas.getContext("2d");
+floor = canvas.getContext("2d");
 
-context.fillRect(30, 30, 50, 50);
+floor.fillRect(0, 750, 1582, 50);
+context.fillRect(766, 700, 50, 50);
 
-context.fillStyle = '#f00';
+floor.fillStyle = '#FF0000';
+context.fillStyle = '#f35';
+
