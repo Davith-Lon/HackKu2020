@@ -15,7 +15,9 @@ context.canvas.width = 1582;
 context.canvas.height = 800;
 
 numObstacles = 0;
+var obstacles = []
 var enemy;
+var jumpVel = 5;
 
 rectangle = {
     jumping: true,
@@ -29,10 +31,10 @@ rectangle = {
 
 class Obstacle {
 
-    constructor(yPos, thiccness, lankiness, color, speed) {
+    constructor(yPos, width, height, color, speed) {
         this.xPos = context.canvas.width;
-        this.thiccness = thiccness;
-        this.lankiness = lankiness;
+        this.width = width;
+        this.height = height;
         this.yPos = yPos;
         this.color = color;
         this.speed = speed;
@@ -40,13 +42,13 @@ class Obstacle {
     };
     draw() {
         context.fillStyle = this.color;
-        context.fillRect(this.xPos, this.yPos, this.thiccness, this.lankiness);
+        context.fillRect(this.xPos, this.yPos, this.width, this.height);
     };
 
     move() {
         this.xPos -= this.speed;
         context.fillStyle = "#539af6";
-        context.fillRect = (this.xPos, this.yPos, context.canvas.width, context.canvas.height)
+        context.fillRect(this.xPos, this.yPos, this.width, this.height)
     };
 
 };
@@ -73,7 +75,7 @@ controller = {
 function moveRect(){
     if (controller.up && rectangle.jumping == false){
         if (weather == "Snow"){
-            rectangle.yVel -= 35;
+            rectangle.yVel -= 50;
         }
         else {
             rectangle.yVel -= 50;
@@ -96,7 +98,7 @@ function moveRect(){
             rectangle.xVel += 3;
         }
     }
-    rectangle.yVel += 5;
+    rectangle.yVel += jumpVel;
     rectangle.xPos += rectangle.xVel;
     rectangle.yPos += rectangle.yVel;
 
@@ -133,22 +135,66 @@ function draw(){
 
 }
 
+function dectectCollide(rect1, rect2) {
+    console.log(rect1.xPos);
+    if (rect1.xPos+rect1.width >= rect2.xPos &&
+        rect1.xPos < rect2.xPos+rect2.width-(rect1.width-jumpVel) &&
+        rect1.yPos <= rect2.yPos + rect2.height &&
+        rect1.yPos+rect1.height>rect2.yPos) {
+            rect1.xPos = rect2.xPos-rect1.width
+            
+            
+            //let pos = obstacles.indexOf(rect2);
+            //let removedItem = obstacles.splice(pos, 1);
+            //context.clearRect(rect2.xPos, rect2.yPos, rect2.width, rect2.height)
+            //numObstacles -= 1;
+            //delete rect2;
+        }
+        
+    else if (
+        rect1.xPos <= rect2.xPos+rect2.width &&
+        rect1.xPos > rect2.xPos+jumpVel &&
+        rect1.yPos <= rect2.yPos + rect2.height &&
+        rect1.yPos+rect1.height>rect2.yPos) {
+            rect1.xPos = rect2.xPos + rect2.width;
+            //console.log(2);
+    }
+    else if (rect1.xPos < rect2.xPos + rect2.width &&
+            rect1.xPos + rect1.width > rect2.xPos &&
+            rect1.yPos+rect1.height < rect2.yPos + rect2.height) {
+                if (rect1.yPos+rect1.height>=rect2.yPos-rect1.height) {
+                    rect1.yPos = rect2.yPos-rect1.height-jumpVel;
+                    rect1.xVel = -rect2.speed;
+                    if (rect1.yVel <= 100) {
+                        rect1.yVel = 0; }
+                }
+
+    }
+    }
+
 function drawWeather(){
 
     
 }
 
+function makeObstacles() {
+    if (numObstacles <= 1) {
+        enemy = new Obstacle(650, 100, 100, "#539af6", 5);
+        let newLength = obstacles.unshift(enemy)
+    }
+    
+    obstacles.forEach(function(item, index, array) {
+        //console.log(item, index)
+        item.draw();
+        item.move();
+        dectectCollide(rectangle, item);
+    })
+}
+
 gameLoop = function(){
     moveRect();
     draw();
-    if (numObstacles <= 1) {
-        enemy = new Obstacle(700, 50, 50, "#539af6", 5);
-    }
-    enemy.draw();
-    context.beginPath();
-    context.fill();
-    enemy.move();
-    console.log(numObstacles);
+    makeObstacles();
     window.requestAnimationFrame(gameLoop);
 }
 window.addEventListener("keydown", controller.keyListener)
