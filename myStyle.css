@@ -7,3 +7,19 @@ p {
   margin-left: 20px;
 }
 
+#startButton {
+ 
+    margin-left: 0px;
+    margin-top: 0px;
+    width: 84px;
+    height: 45px;   
+    background: transparent;
+    border: none;
+    color: green;   
+    font-size:14px;
+    font-weight:700;
+    position: absolute;
+    left: 756px;
+    top: 345px;
+
+}
