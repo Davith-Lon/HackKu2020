@@ -1,4 +1,4 @@
-var canvas, context, controller, floor, rectangle, gameLoop, weather;
+var canvas, context, controller, floor, rectangle, gameLoop, weather, weatherColor;
 
 async function getWeather() {
     const response = await fetch('https://dataservice.accuweather.com/currentconditions/v1/328846?apikey=39KfKD60bv3lZ6CC6qCBMF5ZSfKo3ukU');
@@ -18,6 +18,18 @@ weather = "Sunny";
 
 const CANVAS_WIDTH = 1418;
 const CANVAS_HEIGHT = 760;
+
+if (weather == "Sunny"){
+    weatherColor = "#784814" ; 
+}
+
+else if (weather == "Snow"){
+    weatherColor = "#FFFFFF";
+}
+
+else if (weather == "Rain"){
+    weatherColor = "#14C0F3";
+}
 
 context = document.querySelector("canvas").getContext("2d");
 context.canvas.width = 1582;
@@ -136,7 +148,7 @@ function draw(){
     context.fillStyle = "#202020"; //background
     context.fillRect(0,0,1582,750);
 
-    context.fillStyle = "#000000"; //floor
+    context.fillStyle = weatherColor; //floor
     context.fillRect(0, 750, 1582, 50);
 
     context.fillStyle = "#ff0000"; //rectangle
@@ -147,11 +159,9 @@ function draw(){
     context.fill();
 
 }
-//------------------------------------------------------------------
 
-document.getElementById("TextBox").style.opacity = "1";
+document.getElementById("TextBox").style.opacity = "1"; // Makes it so we can see the game don't touch.
 document.getElementById("TextBox").style.filter = 'alpha(opacity=90)';
-
 
 function dectectCollide(rect1, rect2) {
     console.log(rect1.xPos);
@@ -193,16 +203,21 @@ function dectectCollide(rect1, rect2) {
 function drawWeather(){
 
     if (weather == "Sunny"){
-
-
-    
+        var element = document.getElementById("sunnyHead");
+            element.innerHTML = "Sunny";
     }
+
     else if (weather == "Snow"){
-
+        var element = document.getElementById("sunnyHead");
+            element.innerHTML = "Snowy";
     }
-    else if(weather == "Rain"){
 
+    else if (weather == "Rain"){
+        var element = document.getElementById("sunnyHead");
+            element.innerHTML = "Rainy";
     }
+        
+
     
 }
 
@@ -223,6 +238,7 @@ function makeObstacles() {
 gameLoop = function(){
     moveRect();
     draw();
+    drawWeather();
     makeObstacles();
     window.requestAnimationFrame(gameLoop);
 }
