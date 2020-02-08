@@ -40,13 +40,13 @@ obstacle = {
         this.yPos = yPos;
         this.color = color;
         this.speed = speed;
-    };
+    },
 
     update() {
         this.xPos -= this.speed;
         context.fillStyle = "#539af6";
         context.fillRect = (this.xPos, this.yPos, context.canvas.width, context.canvas.height)
-    };
+    }
 
 };
 
@@ -109,6 +109,11 @@ function draw(){
 
 }
 
+function drawWeather(){
+
+    
+}
+
 gameLoop = function(){
     moveRect();
     draw();
@@ -119,9 +124,3 @@ gameLoop = function(){
 window.addEventListener("keydown", controller.keyListener)
 window.addEventListener("keyup", controller.keyListener)
 window.requestAnimationFrame(gameLoop)
-
-function displaySunny(){
-
-    
-
-}
