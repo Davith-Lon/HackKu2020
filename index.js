@@ -1,4 +1,16 @@
-var canvas, context, controller, floor, rectangle, gameLoop;
+var canvas, context, controller, floor, rectangle, gameLoop, weather;
+
+var request = new XMLHttpRequest();
+request.open('GET', 'http://dataservice.accuweather.com/currentconditions/v1/328846?apikey=39KfKD60bv3lZ6CC6qCBMF5ZSfKo3ukU', true);
+request.responseType = 'text';
+
+request.onload = function () {
+    if (request.readyState === request.DONE && request.status === 200) {
+        weather = JSON.parse(request.responseText);
+        console.log(weather[0].WeatherText);
+    }
+};
+request.send(null);
 
 context = document.querySelector("canvas").getContext("2d");
 context.canvas.width = 1582;
@@ -33,8 +45,7 @@ controller = {
         }
     }
 }
-
-gameLoop = function(){
+function moveRect(){
     if (controller.up && rectangle.jumping == false){
         rectangle.yVel -= 100;
         rectangle.jumping = true;
@@ -56,6 +67,9 @@ gameLoop = function(){
         rectangle.yPos = 700;
         rectangle.yVel = 0;
     }
+}
+
+function draw(){
     context.fillStyle = "#202020";
     context.fillRect(0,0,1582,750);
 
@@ -66,6 +80,12 @@ gameLoop = function(){
     context.beginPath();
     context.rect(rectangle.xPos, rectangle.yPos, rectangle.width, rectangle.height);
     context.fill();
+}
+
+gameLoop = function(){
+    
+    moveRect();
+    draw();
 
     window.requestAnimationFrame(gameLoop);
 }
