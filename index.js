@@ -1,8 +1,8 @@
 var canvas, context, controller, floor, rectangle, gameLoop;
 
 context = document.querySelector("canvas").getContext("2d");
-context.canvas.height = 400;
-context.canvas.height = 400;
+context.canvas.width = 1582;
+context.canvas.height = 800;
 
 rectangle = {
     jumping: true,
@@ -36,27 +36,30 @@ controller = {
 
 gameLoop = function(){
     if (controller.up && rectangle.jumping == false){
-        rectangle.yVel -=20;
+        rectangle.yVel -= 100;
         rectangle.jumping = true;
     }
     if (controller.left){
-        rectangle.xVel -= 0.5;
+        rectangle.xVel -= 3;
     }
     if (controller.right){
-        rectangle.xVel += 0.5;
+        rectangle.xVel += 3;
     }
-    rectangle.yVel += 1.5;
+    rectangle.yVel += 5;
     rectangle.xPos += rectangle.xVel;
     rectangle.yPos += rectangle.yVel;
     rectangle.xVel *= 0.9;
     rectangle.yVel *= 0.9;
 
-    if (rectangle.yPos > 400){
+    if (rectangle.yPos > 700){
         rectangle.jumping = false;
-        rectangle.yPos = 400;
+        rectangle.yPos = 700;
         rectangle.yVel = 0;
     }
     context.fillStyle = "#202020";
+    context.fillRect(0,0,1582,750);
+
+    context.fillStyle = "#000000";
     context.fillRect(0, 750, 1582, 50);
 
     context.fillStyle = "#ff0000";
