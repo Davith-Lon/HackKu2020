@@ -1,5 +1,8 @@
 var canvas, context, controller, floor, rectangle, gameLoop, weather;
 
+const CANVAS_WIDTH = 1366;
+const CANVAS_HEIGHT = 700;
+
 var request = new XMLHttpRequest();
 request.open('GET', 'http://dataservice.accuweather.com/currentconditions/v1/328846?apikey=39KfKD60bv3lZ6CC6qCBMF5ZSfKo3ukU', true);
 request.responseType = 'text';
@@ -108,9 +111,28 @@ function draw(){
     context.fill();
 
 }
+//------------------------------------------------------------------
 
+document.getElementById("TextBox").style.opacity = "1";
+document.getElementById("TextBox").style.filter = 'alpha(opacity=90)';
+
+
+
+
+//-------------------------------------------------------------------
 function drawWeather(){
 
+    if (weather[0].WeatherText == "Sunny"){
+
+
+        
+    }
+    else if (weather[0].WeatherText == "Snow"){
+
+    }
+    else if(weather[0].WeatherText == "Rain"){
+
+    }
     
 }
 

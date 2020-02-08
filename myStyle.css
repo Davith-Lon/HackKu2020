@@ -7,14 +7,25 @@ p {
   margin-left: 20px;
 }
 
+#title {
+  opacity: 1;
+  left: 500px;
+  top: 100px;
+  color: aqua;
+  position: absolute;
+  transition: opacity 0.3 ease-in-out ;
+}
+
 #homeScreen{
+  width: 1418px;
+  height: 760px;
   background-color: black;
   border: 3px solid red;
 }
 
 #onePlayer {
-    margin-left: 500px;
-    margin-top: 400px;
+    margin-left: 400px;
+    margin-top: 350px;
     width: 200px;
     height: 100px;   
     background: white;
@@ -28,8 +39,8 @@ p {
 }
 
 #twoPlayer {
-  margin-left: 900px;
-  margin-top: 400px;
+  margin-left: 800px;
+  margin-top: 350px;
   width: 200px;
   height: 100px;   
   background: white ;
@@ -42,5 +53,67 @@ p {
 }
 
 #gameScreen{
+  width: 1418px;
+  height: 650px;
   border: 3px solid red;
+}
+
+#TextBox{
+  width: 1418px;
+  height: 100px;
+  background:#202020;
+  color: white;
+  border: 3px solid red;
+  left: 0px;
+  top: 0px;
+}
+
+#sunnyHead{
+  opacity: 0;
+  left: 670px;
+  top: 675px;
+  position: absolute;
+  transition: opacity 0.3 ease-in-out ;
+}
+
+#snowHead{
+  opacity: 0;
+  left: 670px;
+  top: 675px;
+  position: absolute;
+  transition: opacity 0.3 ease-in-out ;
+}
+
+#rainHead{
+  opacity: 1;
+  left: 670px;
+  top: 675px;
+  position: absolute;
+  transition: opacity 0.3 ease-in-out ;
+}
+
+#location{
+  opacity: 1;
+  left: 1200px;
+  top: 700px;
+  position: absolute;
+  transition: opacity 0.3 ease-in-out ;
+}
+
+#pl1{
+  opacity: 1;
+  left: 100px;
+  top: 675px;
+  color: red;
+  position: absolute;
+  transition: opacity 0.3 ease-in-out ;
+}
+
+#pl2{
+  opacity: 1;
+  left: 250px;
+  top: 675px;
+  color: blue;
+  position: absolute;
+  transition: opacity 0.3 ease-in-out ;
 }
