@@ -40,13 +40,13 @@ obstacle = {
         this.yPos = yPos;
         this.color = color;
         this.speed = speed;
-    };
+    },
 
     update() {
         this.xPos -= this.speed;
         context.fillStyle = "#539af6";
         context.fillRect = (this.xPos, this.yPos, context.canvas.width, context.canvas.height)
-    };
+    }
 
 };
 
