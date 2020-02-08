@@ -16,6 +16,9 @@ context = document.querySelector("canvas").getContext("2d");
 context.canvas.width = 1582;
 context.canvas.height = 800;
 
+numObstacles = 0;
+var enemy;
+
 rectangle = {
     jumping: true,
     height:  50,
@@ -26,27 +29,25 @@ rectangle = {
     yVel: 0
 };
 
-obstacle = {
-    height: 0,
-    width: 0,
-    xPos: context.canvas.width,
-    yPos: 0,
-    speed: 0,   //pixels/update
-    color: (0,0,0),
+class Obstacle {
 
-    constructor(yPos, width, height, color, speed) {
-        this.width = width;
-        this.height = height;
+    constructor(yPos, thiccness, lankiness, color, speed) {
+        this.xPos = context.canvas.width;
+        this.thiccness = thiccness;
+        this.lankiness = lankiness;
         this.yPos = yPos;
         this.color = color;
         this.speed = speed;
+        numObstacles += 1;
+    };
+    draw() {
+        context.fillStyle = this.color;
+        context.fillRect(this.xPos, this.yPos, this.thiccness, this.lankiness);
     };
 
-    update() {
+    move() {
         this.xPos -= this.speed;
-        context.fillStyle = "#539af6";
-        context.fillRect = (this.xPos, this.yPos, context.canvas.width, context.canvas.height)
-    };
+    }
 
 };
 
@@ -110,6 +111,19 @@ gameLoop = function(){
     
     moveRect();
     draw();
+    
+
+    if (numObstacles <= 1) {
+        enemy = new Obstacle(700, 50, 50, "#539af6", 5);
+    }
+    
+    
+    enemy.draw();
+    context.beginPath();
+    
+    context.fill();
+    enemy.move();
+    console.log(numObstacles);
 
     window.requestAnimationFrame(gameLoop);
 }
