@@ -19,5 +19,5 @@ floor.fillRect(0, 750, 1582, 50);
 context.fillRect(766, 700, 50, 50);
 
 floor.fillStyle = '#FF0000';
-context.fillStyle = '#f35';
+context.fillStyle = '#f00';
 
