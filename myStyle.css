@@ -1,13 +1,6 @@
-body {
-  background-color: white;
-}
 
-p {
-  color: navy;
-  margin-left: 20px;
-}
 
-#title {
+#title { /* Title atributes*/
   opacity: 1;
   left: 500px;
   top: 100px;
@@ -16,14 +9,14 @@ p {
   transition: opacity 0.3 ease-in-out ;
 }
 
-#homeScreen{
+#homeScreen{ /* Home Screen atributes*/
   width: 1418px;
   height: 760px;
   background-color: black;
   border: 3px solid red;
 }
 
-#onePlayer {
+#onePlayer { /* One Player Game atributes*/
     margin-left: 400px;
     margin-top: 350px;
     width: 200px;
@@ -38,7 +31,7 @@ p {
     top: 0px;
 }
 
-#twoPlayer {
+#twoPlayer { /* Two Player Game atributes*/
   margin-left: 800px;
   margin-top: 350px;
   width: 200px;
@@ -52,13 +45,13 @@ p {
   top: 0px;
 }
 
-#gameScreen{
+#gameScreen{ /* Game Screen atributes*/
   width: 1418px;
   height: 650px;
   border: 3px solid red;
 }
 
-#TextBox{
+#TextBox{ /* Condition and Location text box during the Game atributes*/
   width: 1418px;
   height: 100px;
   background:#202020;
@@ -68,23 +61,7 @@ p {
   top: 0px;
 }
 
-#sunnyHead{
-  opacity: 0;
-  left: 670px;
-  top: 675px;
-  position: absolute;
-  transition: opacity 0.3 ease-in-out ;
-}
-
-#snowHead{
-  opacity: 0;
-  left: 670px;
-  top: 675px;
-  position: absolute;
-  transition: opacity 0.3 ease-in-out ;
-}
-
-#rainHead{
+#sunnyHead{ /* Sunny Condition text*/
   opacity: 1;
   left: 670px;
   top: 675px;
@@ -92,7 +69,7 @@ p {
   transition: opacity 0.3 ease-in-out ;
 }
 
-#location{
+#location{ /* Location text*/
   opacity: 1;
   left: 1200px;
   top: 700px;
@@ -100,7 +77,7 @@ p {
   transition: opacity 0.3 ease-in-out ;
 }
 
-#pl1{
+#pl1{ /* Player 1 text*/
   opacity: 1;
   left: 100px;
   top: 675px;
@@ -109,7 +86,7 @@ p {
   transition: opacity 0.3 ease-in-out ;
 }
 
-#pl2{
+#pl2{ /* PLayer 2 text*/
   opacity: 1;
   left: 250px;
   top: 675px;
