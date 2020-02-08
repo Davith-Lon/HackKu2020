@@ -1,8 +1,6 @@
-var screen, controller, rectangle, gameLoop;
+var canvas, context, controller, rectangle, gameLoop;
 
-screen = document.querySelector("canvas").getContext("2d");
-screen.canvas.height = 200;
-screen.canvas.width = 400;
+
 rectangle = {
     jumping: true,
     height:  0,
@@ -13,8 +11,8 @@ rectangle = {
     yVel: 0
 
 };
-let canvas = document.getElementById("gameScreen");
-let context = canvas.getContext("2d");
+canvas = document.getElementById("gameScreen");
+context = canvas.getContext("2d");
 
 context.fillRect(30, 30, 50, 50);
 
