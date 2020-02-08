@@ -12,8 +12,32 @@ rectangle = {
     xVel: 0,
     yPos: 750,
     yVel: 0
+};
+
+obstacle = {
+    height: 0,
+    width: 0,
+    xPos: context.canvas.width,
+    yPos: 0,
+    speed: 0,   //pixels/update
+    color: (0,0,0),
+
+    constructor(yPos, width, height, color, speed) {
+        this.width = width;
+        this.height = height;
+        this.yPos = yPos;
+        this.color = color;
+        this.speed = speed;
+    };
+
+    update() {
+        this.xPos -= this.speed;
+        context.fillStyle = "#539af6";
+        context.fillRect = (this.xPos, this.yPos, context.canvas.width, context.canvas.height)
+    };
 
 };
+
 controller = {
     left: false,
     right: false,
