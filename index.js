@@ -1,12 +1,8 @@
-<<<<<<< HEAD
-var canvas, context, controller, floor, rectangle, gameLoop, weather, weatherColor, backgroundColor, grdSun, grdSnow, grdRain;
-=======
 var canvas, context, controller, rectangle, gameLoop, weather, weatherColor, Locations, key, rand;
 
 locations = [328846]
 key = '39KfKD60bv3lZ6CC6qCBMF5ZSfKo3ukU';
 rand = Math.random(1);
->>>>>>> ac18ac5084f932d593313db901c543737e96f0ac
 
 async function getWeather() {
     const response = await fetch('https://dataservice.accuweather.com/currentconditions/v1/' + locations[rand] + '?apikey=' + key);
@@ -26,25 +22,15 @@ if (weather != "Sunny"){
 const CANVAS_WIDTH = 1418;
 const CANVAS_HEIGHT = 760;
 
-<<<<<<< HEAD
-grdSun = '#FFFFFF';
-
-if (weather == "Sunny"){//------------------------------
-    backgroundColor = grdSun;
-    weatherColor = "#784814" ; 
-=======
 if (weather == "Sunny"){
     weatherColor = "#784814" ; //change color
->>>>>>> ac18ac5084f932d593313db901c543737e96f0ac
 }
 
 else if (weather == "Snow"){
-    backgroundColor = grdSnow;
     weatherColor = "#FFFFFF";
 }
 
 else if (weather == "Rain"){
-    backgroundColor = grdRain;
     weatherColor = "#14C0F3";
 }
 
