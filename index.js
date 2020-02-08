@@ -3,7 +3,7 @@ var canvas, context, controller, floor, rectangle, gameLoop, weather;
 const CANVAS_WIDTH = 1418;
 const CANVAS_HEIGHT = 760;
 
-var request = new XMLHttpRequest();
+/*var request = new XMLHttpRequest();
 request.open('GET', 'http://dataservice.accuweather.com/currentconditions/v1/328846?apikey=39KfKD60bv3lZ6CC6qCBMF5ZSfKo3ukU', true);
 request.responseType = 'text';
 
@@ -14,7 +14,7 @@ request.onload = function () {
     }
 };
 request.send(null);
-
+*/
 context = document.querySelector("canvas").getContext("2d");
 context.canvas.width = 1582;
 context.canvas.height = 800;
@@ -53,7 +53,7 @@ class Obstacle {
     move() {
         this.xPos -= this.speed;
         context.fillStyle = "#539af6";
-        context.fillRect = (this.xPos, this.yPos, context.canvas.width, context.canvas.height)
+        context.fillRect(this.xPos, this.yPos, this.width, this.height)
     };
 
 };
