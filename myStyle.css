@@ -8,7 +8,6 @@ p {
 }
 
 #startButton {
- 
     margin-left: 0px;
     margin-top: 0px;
     width: 84px;
@@ -21,5 +20,8 @@ p {
     position: absolute;
     left: 756px;
     top: 345px;
+}
 
+#gameScreen{
+  border: 3px solid red;
 }
