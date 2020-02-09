@@ -35,7 +35,7 @@ context = document.querySelector("canvas").getContext("2d");
 context.canvas.width = 1582;
 context.canvas.height = 800;
 
-numObstacles = 0;
+var numObstacles = 0;
 var obstacles = []
 var enemy;
 var jumpVel = 5;
@@ -97,7 +97,7 @@ controller = {
     }
 }
 function moveRect(){
-    console.log(rectangle.xVel);
+    
     if (controller.up && rectangle.jumping == false){
         if (weather == "Snow"){
             rectangle.yVel -= (jumpHeight-15);
@@ -134,10 +134,12 @@ function moveRect(){
         rectangle.xVel *= 0.9;
         rectangle.yVel *= 0.9;
     }
-    if (glue == true&&!controller.left&&!controller.right&&rectangle.xVel >= -currSd) {
-        if (rectangle.xVel <= 0) {
-            rectangle.xVel -= (currSd+rectangle.xVel);
-        }
+    if (glue == true&&!controller.left&&!controller.right&&rectangle.xVel >= -currSd && rectangle.xVel <= 0) {
+
+        rectangle.xVel -= (currSd+rectangle.xVel); }
+    
+    else if (glue == true&&!controller.left&&!controller.right&& currSd-rectangle.xVel>0 && rectangle.xVel >0) {
+            rectangle.xVel -= (currSd-rectangle.xVel);
     }
     if (rectangle.yPos > 700){
         rectangle.jumping = false;
@@ -173,14 +175,34 @@ document.getElementById("TextBox").style.opacity = "1"; // Makes it so we can se
 document.getElementById("TextBox").style.filter = 'alpha(opacity=90)';
 
 function dectectCollide(rect1, rect2) {
-    //console.log(rect1.xPos);
-    compensate = false;
-    if (rect1.xPos+rect1.width >= rect2.xPos &&
-        rect1.xPos < rect2.xPos+rect2.width-(rect1.width-jumpVel) &&
-        rect1.yPos <= rect2.yPos + rect2.height &&
+    console.log(glue);
+    //console.log(rect1.yPos+rect1.height);
+    //console.log(rect2.yPos);
+    if (rect1.xPos+rect1.width <= rect2.xPos + rect2.width &&
+        rect1.xPos >= rect2.xPos &&
+        rect1.yPos+rect1.height >= rect2.yPos-jumpVel &&
+        rect1.yPos+rect1.height <= rect2.yPos + (rect1.height/2)) {
+                
+                rect1.yPos = rect2.yPos-rect1.height-jumpVel;
+                rect1.yVel = 0; 
+                if (rect1.yPos+rect1.height == rect2.yPos-jumpVel) {
+                    rect1.jumping = false; }
+                if (glue == false) {
+                    glue = true;
+                    currSd = rect2.speed;
+                }
+                
+                    
+            
+    
+    }
+    
+    else if (rect1.xPos+rect1.width >= rect2.xPos &&
+        rect1.xPos+rect1.width < rect2.xPos+rect2.width-(rect1.width-jumpVel) &&
+        rect1.yPos < rect2.yPos + rect2.height &&
         rect1.yPos+rect1.height>rect2.yPos) {
             rect1.xPos = rect2.xPos-rect1.width
-            
+            rect1.xVel = 0;
             
             //let pos = obstacles.indexOf(rect2);
             //let removedItem = obstacles.splice(pos, 1);
@@ -191,28 +213,12 @@ function dectectCollide(rect1, rect2) {
         
     else if (
         rect1.xPos <= rect2.xPos+rect2.width &&
-        rect1.xPos > rect2.xPos+jumpVel &&
-        rect1.yPos <= rect2.yPos + rect2.height &&
+        rect1.xPos > rect2.xPos+(rect1.width/2) &&
+        rect1.yPos < rect2.yPos + rect2.height &&
         rect1.yPos+rect1.height>rect2.yPos) {
             rect1.xPos = rect2.xPos + rect2.width;
+            rect1.xVel = 0;
             //console.log(2);
-    }
-    else if (rect1.xPos < rect2.xPos + rect2.width &&
-            rect1.xPos + rect1.width > rect2.xPos &&
-            rect1.yPos+rect1.height < rect2.yPos + rect2.height) {
-                if (rect1.yPos+rect1.height>=rect2.yPos-rect1.height) {
-                    rect1.yPos = rect2.yPos-rect1.height-jumpVel;
-                    if (glue == false) {
-                        glue = true;
-                        currSd = rect2.speed;
-                    }
-                    if (rect1.yVel <= jumpHeight) {
-                        
-                        
-                        
-                        rect1.yVel = 0;
-                        rect1.jumping = false; }
-                }
     }
     else {
         glue = false;
@@ -242,7 +248,7 @@ function drawWeather(){
 
 function makeObstacles() {
     if (numObstacles <= 1) {
-        enemy = new Obstacle(650, 2000, 100, "#539af6", 5);
+        enemy = new Obstacle(550, 250, 200, "#539af6", 3);
         let newLength = obstacles.unshift(enemy)
     }
     
