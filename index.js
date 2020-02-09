@@ -1,20 +1,27 @@
-var canvas, context, controller, rectangle, gameLoop, weather, weatherColor, Locations, key, rand;
-
-locations = [328846]
-key = '39KfKD60bv3lZ6CC6qCBMF5ZSfKo3ukU';
-rand = Math.random(1);
+var canvas, context, controller, rectangle, gameLoop, weather, weatherColor, rand;
 
 async function getWeather() {
-    const response = await fetch('https://dataservice.accuweather.com/currentconditions/v1/' + locations[rand] + '?apikey=' + key);
+    const response = await fetch('https://dataservice.accuweather.com/currentconditions/v1/328846?apikey=NJt0OiaGOOS4tXiwUXwGw2LUsOA0vQMe');
     const json = await response.json();
+    console.log(json);
     return json.WeatherText;
 }
-
+console.log(getWeather());
 weather = getWeather();
+
 if (weather != "Sunny"){
     if (weather != "Rain"){
         if (weather != "Snow"){
-            weather = "Sunny";
+            rand = Math.floor(Math.random() * 4)
+            if (rand == 0){
+                weather = "Sunny";
+            }
+            else if (rand == 1){
+                weather = "Rain";
+            }
+            else if (rand == 2){
+                weather = "Snow";
+            }
         }
     }
 }
@@ -100,7 +107,7 @@ controller = {
     }
 }
 function moveRect(){
-    console.log(rectangle.xVel);
+    //consoleconsole.log(rectangle.xVel);
     if (controller.up && rectangle.jumping == false){
         if (weather == "Snow"){
             rectangle.yVel -= (jumpHeight-15);
@@ -238,14 +245,11 @@ function drawWeather(){
         var element = document.getElementById("sunnyHead");
             element.innerHTML = "Rainy";
     }
-        
-
-    
 }
 
 function makeObstacles() {
     if (numObstacles <= 1) {
-        enemy = new Obstacle(650, 2000, 100, "#539af6", 5);
+        enemy = new Obstacle(650, 500, 100, "#539af6", 5);
         let newLength = obstacles.unshift(enemy)
     }
     
