@@ -36,6 +36,11 @@ else if (weather == "Rain"){
     weatherColor = "#14C0F3";
 }
 
+function scoreUpdate(){
+    var element = document.getElementById("score");
+            element.innerHTML = 10000;
+}
+
 numObstacles = 0;
 var obstacles = []
 var enemy;
@@ -155,8 +160,6 @@ function moveRect(){
 }
 
 function draw(){
-   
-
 
     if (weather == "Sunny"){
 
@@ -186,17 +189,12 @@ function draw(){
     context.fillStyle = weatherColor; //floor
     context.fillRect(0, 750, 1582, 50);
 
-    context.fillStyle = "#ff0000"; //rectangle
+    context.fillStyle = "#FFF000";
     context.beginPath();
     context.rect(rectangle.xPos, rectangle.yPos, rectangle.width, rectangle.height);
-
-    
     context.fill();
 
 }
-
-document.getElementById("TextBox").style.opacity = "1"; // Makes it so we can see the game don't touch.
-document.getElementById("TextBox").style.filter = 'alpha(opacity=90)';
 
 function dectectCollide(rect1, rect2) {
     //console.log(rect1.xPos);
@@ -260,10 +258,7 @@ function drawWeather(){
     else if (weather == "Rain"){
         var element = document.getElementById("sunnyHead");
             element.innerHTML = "Rainy";
-    }
-        
-
-    
+    }  
 }
 
 function makeObstacles() {
@@ -285,6 +280,7 @@ gameLoop = function(){
     draw();
     drawWeather();
     makeObstacles();
+    scoreUpdate();
     window.requestAnimationFrame(gameLoop);
 }
 window.addEventListener("keydown", controller.keyListener)

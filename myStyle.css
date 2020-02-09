@@ -2,11 +2,11 @@
 
 #title { /* Title atributes*/
   opacity: 1;
-  left: 500px;
+  left: 300px;
   top: 100px;
-  color: aqua;
+  font-size:50px;
+  color: black;
   position: absolute;
-  transition: opacity 0.3 ease-in-out ;
 }
 
 #homeScreen{ /* Home Screen atributes*/
@@ -17,32 +17,18 @@
 }
 
 #onePlayer { /* One Player Game atributes*/
-    margin-left: 400px;
+    margin-left: 600px;
     margin-top: 350px;
     width: 200px;
     height: 100px;   
-    background: white;
-    border: none;
-    color: green;   
-    font-size:14px;
+    background: black;
+    border: 3px solid red;
+    color: white;   
+    font-size:30px;
     font-weight:700;
     position: absolute;
     left: 0px;
     top: 0px;
-}
-
-#twoPlayer { /* Two Player Game atributes*/
-  margin-left: 800px;
-  margin-top: 350px;
-  width: 200px;
-  height: 100px;   
-  background: white ;
-  color: green;   
-  font-size:14px;
-  font-weight:700;
-  position: absolute;
-  left: 0px;
-  top: 0px;
 }
 
 #gameScreen{ /* Game Screen atributes*/
@@ -66,15 +52,13 @@
   left: 670px;
   top: 675px;
   position: absolute;
-  transition: opacity 0.3 ease-in-out ;
 }
 
 #location{ /* Location text*/
   opacity: 1;
   left: 1200px;
-  top: 700px;
+  top: 675px;
   position: absolute;
-  transition: opacity 0.3 ease-in-out ;
 }
 
 #pl1{ /* Player 1 text*/
@@ -83,14 +67,12 @@
   top: 675px;
   color: red;
   position: absolute;
-  transition: opacity 0.3 ease-in-out ;
 }
 
-#pl2{ /* PLayer 2 text*/
+#score{
   opacity: 1;
-  left: 250px;
+  margin-left: 175px;
   top: 675px;
-  color: blue;
+  color: white;
   position: absolute;
-  transition: opacity 0.3 ease-in-out ;
 }
