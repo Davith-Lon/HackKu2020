@@ -1,4 +1,8 @@
-var canvas, context, controller, rectangle, gameLoop, weather, weatherColor, rand;
+var canvas, context, controller, rectangle, gameLoop, weather, weatherColor, Locations, key, rand, grSun, grRain , grSnow;
+
+locations = [328846]
+key = '39KfKD60bv3lZ6CC6qCBMF5ZSfKo3ukU';
+rand = Math.random(1);
 
 async function getWeather() {
     const response = await fetch('https://dataservice.accuweather.com/currentconditions/v1/328846?apikey=NJt0OiaGOOS4tXiwUXwGw2LUsOA0vQMe');
@@ -12,7 +16,8 @@ weather = getWeather();
 if (weather != "Sunny"){
     if (weather != "Rain"){
         if (weather != "Snow"){
-            rand = Math.floor(Math.random() * 4)
+            rand = Math.floor(Math.random() * 3)
+            console.log(rand);
             if (rand == 0){
                 weather = "Sunny";
             }
@@ -29,21 +34,19 @@ if (weather != "Sunny"){
 const CANVAS_WIDTH = 1418;
 const CANVAS_HEIGHT = 760;
 
-if (weather == "Sunny"){
-    weatherColor = "#784814" ; //change color
-}
-
-else if (weather == "Snow"){
-    weatherColor = "#FFFFFF";
-}
-
-else if (weather == "Rain"){
-    weatherColor = "#14C0F3";
-}
-
 context = document.querySelector("canvas").getContext("2d");
 context.canvas.width = 1582;
 context.canvas.height = 800;
+
+if (weather == "Sunny"){
+    weatherColor = "#78BF31" ; //change color
+}
+else if (weather == "Snow"){
+    weatherColor = "#FFFFFF";
+}
+else if (weather == "Rain"){
+    weatherColor = "#14C0F3";
+}
 
 numObstacles = 0;
 var obstacles = []
@@ -164,8 +167,32 @@ function moveRect(){
 }
 
 function draw(){
-    context.fillStyle = "#000000"; //background
-    context.fillRect(0,0,1582,750);
+
+
+    if (weather == "Sunny"){
+
+        grSun = context.createLinearGradient(150.000, 0.000, 150.000, 300.000); 
+            grSun.addColorStop(0.8, 'rgba(149, 210, 216, 1.000)');
+            grSun.addColorStop(1.000, 'rgba(31, 118, 198, 1.000)');
+        context.fillStyle = grSun;
+        context.fillRect(0,0,1582,750);
+    }
+    
+    else if (weather == "Snow"){
+            grSnow = context.createLinearGradient(150.000, 0.000, 150.000, 300.000);
+                grSnow.addColorStop(0.509, 'rgba(182, 198, 214, 1.000)');
+                grSnow.addColorStop(0.900, 'rgba(121, 121, 181, 1.000)');
+            context.fillStyle = grSnow;
+            context.fillRect(0,0,1582,750);
+    }
+    
+    else if (weather == "Rain"){
+        grRain = context.createLinearGradient(150.000, 0.000, 150.000, 300.000);
+            grRain.addColorStop(0.500, 'rgba(67, 120, 173, 1.000)');
+            grRain.addColorStop(0.924, 'rgba(26, 26, 91, 1.000)');
+        context.fillStyle = grRain;
+        context.fillRect(0,0,1582,750);
+    }
 
     context.fillStyle = weatherColor; //floor
     context.fillRect(0, 750, 1582, 50);
